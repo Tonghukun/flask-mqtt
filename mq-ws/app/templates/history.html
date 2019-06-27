@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+</head>
+<link href="{{ url_for('static', filename='css/materialize.css') }}" rel="stylesheet">
+      <table class="striped centered">
+        <thead>
+          <tr>		  
+        {% if sensor_name == 'DHT22' %}
+			      <th>传感器位于粮仓位置</th>
+				    <th>粮仓内温度</th>
+				    <th>粮仓内湿度</th>
+				    <th>感测时间</th>
+        {% elif sensor_name == 'MQ7' %}
+            <th>传感器位于粮仓位置</th>
+            <th>粮仓内CO浓度检测值</th>
+            <th>感测时间</th>
+			  {% endif %}
+          </tr>
+        </thead>
+
+        <tbody>
+		  {% for data in json_list %}
+            <tr>
+			  {% for k, v in data.items() %}
+			    <td>{{ v }}</td>
+			  {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+            
+<script src="{{ url_for('static', filename='js/materialize.js') }}"></script>
